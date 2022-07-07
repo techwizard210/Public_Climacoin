@@ -810,87 +810,7 @@ impl pallet_membership::Config<pallet_membership::Instance1> for Runtime {
 	type WeightInfo = pallet_membership::weights::SubstrateWeight<Runtime>;
 }
 
-parameter_types! {
-	pub const LaunchPeriod: BlockNumber = 28 * 24 * 60 * MINUTES;
-	pub const VotingPeriod: BlockNumber = 28 * 24 * 60 * MINUTES;
-	pub const FastTrackVotingPeriod: BlockNumber = 3 * 24 * 60 * MINUTES;
-	pub const MinimumDeposit: Balance = 100 * DOLLARS;
-	pub const EnactmentPeriod: BlockNumber = 30 * 24 * 60 * MINUTES;
-	pub const CooloffPeriod: BlockNumber = 28 * 24 * 60 * MINUTES;
-	pub const MaxProposals: u32 = 100;
-}
 
-impl pallet_democracy::Config for Runtime {
-	type Proposal = Call;
-	type Event = Event;
-	type Currency = Balances;
-	type EnactmentPeriod = EnactmentPeriod;
-	type LaunchPeriod = LaunchPeriod;
-	type VotingPeriod = VotingPeriod;
-	type VoteLockingPeriod = EnactmentPeriod; // Same as EnactmentPeriod
-	type MinimumDeposit = MinimumDeposit;
-	/// A straight majority of the council can decide what their next motion is.
-	type ExternalOrigin =
-		pallet_collective::EnsureProportionAtLeast<AccountId, CouncilCollective, 1, 2>;
-	/// A super-majority can have the next scheduled referendum be a straight majority-carries vote.
-	type ExternalMajorityOrigin =
-		pallet_collective::EnsureProportionAtLeast<AccountId, CouncilCollective, 3, 4>;
-	/// A unanimous council can have the next scheduled referendum be a straight default-carries
-	/// (NTB) vote.
-	type ExternalDefaultOrigin =
-		pallet_collective::EnsureProportionAtLeast<AccountId, CouncilCollective, 1, 1>;
-	/// Two thirds of the technical committee can have an ExternalMajority/ExternalDefault vote
-	/// be tabled immediately and with a shorter voting/enactment period.
-	type FastTrackOrigin =
-		pallet_collective::EnsureProportionAtLeast<AccountId, TechnicalCollective, 2, 3>;
-	type InstantOrigin =
-		pallet_collective::EnsureProportionAtLeast<AccountId, TechnicalCollective, 1, 1>;
-	type InstantAllowed = frame_support::traits::ConstBool<true>;
-	type FastTrackVotingPeriod = FastTrackVotingPeriod;
-	// To cancel a proposal which has been passed, 2/3 of the council must agree to it.
-	type CancellationOrigin =
-		pallet_collective::EnsureProportionAtLeast<AccountId, CouncilCollective, 2, 3>;
-	// To cancel a proposal before it has been passed, the technical committee must be unanimous or
-	// Root must agree.
-	type CancelProposalOrigin = EnsureOneOf<
-		EnsureRoot<AccountId>,
-		pallet_collective::EnsureProportionAtLeast<AccountId, TechnicalCollective, 1, 1>,
-	>;
-	type BlacklistOrigin = EnsureRoot<AccountId>;
-	// Any single technical committee member may veto a coming council proposal, however they can
-	// only do it once and it lasts only for the cool-off period.
-	type VetoOrigin = pallet_collective::EnsureMember<AccountId, TechnicalCollective>;
-	type CooloffPeriod = CooloffPeriod;
-	type PreimageByteDeposit = PreimageByteDeposit;
-	type OperationalPreimageOrigin = pallet_collective::EnsureMember<AccountId, CouncilCollective>;
-	type Slash = Treasury;
-	type Scheduler = Scheduler;
-	type PalletsOrigin = OriginCaller;
-	type MaxVotes = frame_support::traits::ConstU32<100>;
-	type WeightInfo = pallet_democracy::weights::SubstrateWeight<Runtime>;
-	type MaxProposals = MaxProposals;
-}
-
-parameter_types! {
-	pub MaximumSchedulerWeight: Weight = Perbill::from_percent(80) *
-		BlockWeights::get().max_block;
-	// Retry a scheduled item every 10 blocks (1 minute) until the preimage exists.
-	pub const NoPreimagePostponement: Option<u32> = Some(10);
-}
-
-impl pallet_scheduler::Config for Runtime {
-	type Event = Event;
-	type Origin = Origin;
-	type PalletsOrigin = OriginCaller;
-	type Call = Call;
-	type MaximumWeight = MaximumSchedulerWeight;
-	type ScheduleOrigin = EnsureRoot<AccountId>;
-	type MaxScheduledPerBlock = ConstU32<50>;
-	type WeightInfo = pallet_scheduler::weights::SubstrateWeight<Runtime>;
-	type OriginPrivilegeCmp = EqualPrivilegeOnly;
-	type PreimageProvider = Preimage;
-	type NoPreimagePostponement = NoPreimagePostponement;
-}
 
 parameter_types! {
 	pub const PreimageMaxSize: u32 = 4096 * 1024;
@@ -936,9 +856,7 @@ construct_runtime!(
 		TransactionPayment: pallet_transaction_payment,
 
 		// Governance
-		Scheduler: pallet_scheduler,
 		Treasury: pallet_treasury,
-		Democracy: pallet_democracy,
 		Council: pallet_collective::<Instance1>,
 		TechnicalCommittee: pallet_collective::<Instance2>,
 		Elections: pallet_elections_phragmen,
@@ -995,9 +913,7 @@ mod benches {
 		[pallet_utility, Utility]
 		[pallet_offences, OffencesBench::<Runtime>]
 		[pallet_im_online, ImOnline]
-		[pallet_scheduler, Scheduler]
 		[pallet_treasury, Treasury]
-		[pallet_democracy, Democracy]
 		[pallet_collective, Council]
 		[pallet_membership, TechnicalMembership]
 		[pallet_elections_phragmen, Elections]
