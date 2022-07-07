@@ -2,7 +2,7 @@ use hex_literal::hex;
 use node_primitives::*;
 use node_template_runtime::{
 	constants::currency::*, opaque::SessionKeys, BabeConfig, BalancesConfig, CouncilConfig,
-	DemocracyConfig, ElectionsConfig, GenesisConfig, GrandpaConfig, ImOnlineConfig, MaxNominations,
+	ElectionsConfig, GenesisConfig, GrandpaConfig, ImOnlineConfig, MaxNominations,
 	SessionConfig, StakerStatus, StakingConfig, SudoConfig, SystemConfig, TechnicalCommitteeConfig,
 	BABE_GENESIS_EPOCH_CONFIG, wasm_binary_unwrap,
 };
@@ -321,7 +321,6 @@ fn testnet_genesis(
 		babe: BabeConfig { authorities: vec![], epoch_config: Some(BABE_GENESIS_EPOCH_CONFIG) },
 		grandpa: GrandpaConfig { authorities: vec![] },
 		im_online: ImOnlineConfig { keys: vec![] },
-		democracy: DemocracyConfig::default(),
 		elections: ElectionsConfig {
 			members: endowed_accounts
 				.iter()
