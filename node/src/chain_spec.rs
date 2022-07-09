@@ -194,7 +194,7 @@ fn testnet_genesis(
 		},
 		balances: BalancesConfig {
 			// Configure endowed accounts with initial balance of 1 << 60.
-			balances: endowed_accounts.iter().cloned().map(|k| (k, 29000000000)).collect(),
+			balances: endowed_accounts.iter().cloned().map(|k| (k, 29000000000000000000000)).collect(),
 		},
 		session: SessionConfig {
 			keys: initial_authorities
