@@ -431,18 +431,6 @@ impl pallet_staking::Config for Runtime {
 	type BenchmarkingConfig = StakingBenchmarkingConfig;
 }
 
-parameter_types! {
-	pub const UncleGenerations: BlockNumber = 5;
-}
-
-impl pallet_authorship::Config for Runtime {
-	type FindAuthor = pallet_session::FindAccountFromAuthorIndex<Self, Babe>;
-	type UncleGenerations = UncleGenerations;
-	type FilterUncle = ();
-	type EventHandler = (Staking, ImOnline);
-}
-
-
 impl pallet_offences::Config for Runtime {
 	type Event = Event;
 	type IdentificationTuple = pallet_session::historical::IdentificationTuple<Self>;
