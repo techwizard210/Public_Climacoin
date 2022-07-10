@@ -354,6 +354,11 @@ impl pallet_transaction_payment::Config for Runtime {
 	type FeeMultiplierUpdate = ();
 }
 
+impl pallet_sudo::Config for Runtime {
+	type Event = Event;
+	type Call = Call;
+}
+
 
 /// Maximum number of iterations for balancing that will be executed in the embedded OCW
 /// miner of election provider multi phase.
@@ -756,6 +761,13 @@ impl pallet_membership::Config<pallet_membership::Instance1> for Runtime {
 	type WeightInfo = pallet_membership::weights::SubstrateWeight<Runtime>;
 }
 
+impl pallet_utility::Config for Runtime {
+	type Event = Event;
+	type Call = Call;
+	type PalletsOrigin = OriginCaller;
+	type WeightInfo = pallet_utility::weights::SubstrateWeight<Runtime>;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -764,6 +776,7 @@ construct_runtime!(
 		UncheckedExtrinsic = UncheckedExtrinsic
 	{
 		System: frame_system,
+		Utility: pallet_utility,
 		RandomnessCollectiveFlip: pallet_randomness_collective_flip,
 		Timestamp: pallet_timestamp,
 		// Authorship must be before session in order to note author in the correct session and era
@@ -786,6 +799,7 @@ construct_runtime!(
 		Council: pallet_collective::<Instance1>,
 		TechnicalCommittee: pallet_collective::<Instance2>,
 		TechnicalMembership: pallet_membership::<Instance1>,
+		Sudo: pallet_sudo,
 
 		// Include the custom logic from the pallet-template in the runtime.
 		TemplateModule: pallet_template,
@@ -833,6 +847,7 @@ mod benches {
 		[frame_system, SystemBench::<Runtime>]
 		[pallet_balances, Balances]
 		[pallet_timestamp, Timestamp]
+		[pallet_utility, Utility]
 		[pallet_offences, OffencesBench::<Runtime>]
 		[pallet_im_online, ImOnline]
 		[pallet_treasury, Treasury]

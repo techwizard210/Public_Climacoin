@@ -2,7 +2,7 @@ use hex_literal::hex;
 use node_primitives::*;
 use node_template_runtime::{
 	constants::currency::*, opaque::SessionKeys, BabeConfig, BalancesConfig, CouncilConfig,
-	GenesisConfig, GrandpaConfig, ImOnlineConfig, MaxNominations,
+	GenesisConfig, GrandpaConfig, ImOnlineConfig, MaxNominations, SudoConfig,
 	SessionConfig, StakerStatus, StakingConfig, SystemConfig, TechnicalCommitteeConfig,
 	BABE_GENESIS_EPOCH_CONFIG, wasm_binary_unwrap,
 };
@@ -272,7 +272,7 @@ fn testnet_genesis(
 	// stakers: all validators and nominators.
 	const ENDOWMENT: Balance = 10_000_000 * DOLLARS;
 	// const STASH: Balance = ENDOWMENT / 1000;
-	const STASH: Balance = 29000000000 / 1000;
+	const STASH: Balance = 1_000_000_000_000_000_000_000;
 	let mut rng = rand::thread_rng();
 	let stakers = initial_authorities
 		.iter()
@@ -333,6 +333,10 @@ fn testnet_genesis(
 		},
 		technical_membership: Default::default(),
 		treasury: Default::default(),
+		sudo: SudoConfig {
+			// Assign network admin rights.
+			key: Some(root_key),
+		},
 		transaction_payment: Default::default(),
 	}
 }
