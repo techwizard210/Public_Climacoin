@@ -1,4 +1,4 @@
 pub mod authorship;
-pub mod timestamp;
 pub mod balances;
+pub mod timestamp;
 pub mod transaction_payment;
