@@ -3,7 +3,10 @@ pub mod babe;
 pub use babe::*;
 pub mod bags_list;
 pub mod balances;
-// pub mod collective;
+
+pub mod collective;
+pub use collective::*;
+
 pub mod timestamp;
 pub mod transaction_payment;
 
