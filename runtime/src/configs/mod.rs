@@ -15,3 +15,6 @@ pub mod session;
 
 pub mod staking;
 pub use staking::*;
+
+pub mod sudo;
+pub use sudo::*;

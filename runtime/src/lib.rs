@@ -328,11 +328,6 @@ impl pallet_grandpa::Config for Runtime {
 	type MaxAuthorities = ConstU32<32>;
 }
 
-impl pallet_sudo::Config for Runtime {
-	type Event = Event;
-	type Call = Call;
-}
-
 sp_npos_elections::generate_solution_type!(
 	#[compact]
 	pub struct NposSolution16::<
