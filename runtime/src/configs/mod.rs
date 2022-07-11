@@ -1,4 +1,6 @@
 pub mod authorship;
+pub mod babe;
+pub use babe::*;
 pub mod bags_list;
 pub mod balances;
 // pub mod collective;
