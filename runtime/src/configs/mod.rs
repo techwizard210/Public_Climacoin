@@ -18,3 +18,6 @@ pub use staking::*;
 
 pub mod sudo;
 pub use sudo::*;
+
+pub mod grandpa;
+pub use grandpa::*;
