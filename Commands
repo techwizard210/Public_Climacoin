@@ -1,0 +1,75 @@
+/target/release/substrate-climacoin key generate-node-key
+
+
+./target/release/substrate-climacoin \
+--base-path /tmp/first \
+--chain chainspec/customSpecRaw.json \
+--port 30334 \
+--ws-port 9944 \
+--rpc-port 9934 \
+--node-key 0b078f108b3d9d3c9bb41673707eec09f82a9c453286b712c6c3b5c264e2cf13 \
+--validator \
+--alice
+
+
+./target/release/substrate-climacoin \
+--base-path /tmp/second \
+--chain chainspec/customSpecRaw.json \
+--port 30335 \
+--ws-port 9945 \
+--rpc-port 9935 \
+--validator \
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
+--bob
+
+
+./target/release/substrate-climacoin \
+--base-path /tmp/third \
+--chain chainspec/customSpecRaw.json \
+--port 30336 \
+--ws-port 9946 \
+--rpc-port 9936 \
+--validator \
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
+--charlie
+
+
+./target/release/substrate-climacoin \
+--base-path /tmp/forth \
+--chain chainspec/customSpecRaw.json \
+--port 30337 \
+--ws-port 9947 \
+--rpc-port 9937 \
+--validator \
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
+--dave
+
+
+
+./target/release/substrate-climacoin \
+--base-path /tmp/fifth   \
+--chain chainspec/customSpecRaw.json \
+--port 30338 \
+--ws-port 9948 \
+--rpc-port 9938 \
+--validator \
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
+--eve
+
+
+
+
+./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//1//babe" --password-interactive --key-type babe
+
+./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "$SECRET//1//grandpa" --password-interactive --key-type gran
+
+./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//1//im_online" --password-interactive --key-type imon
+
+
+./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//2//babe" --password-interactive --key-type babe
+
+./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "$SECRET//2//grandpa" --password-interactive --key-type gran
+
+./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//2//im_online" --password-interactive --key-type imon
+
+
