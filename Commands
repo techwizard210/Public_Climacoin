@@ -1,4 +1,16 @@
-/target/release/substrate-climacoin key generate-node-key
+./target/release/substrate-climacoin key generate-node-key
+
+
+./target/release/substrate-climacoin build-spec --chain=chainspec/customSpec.json --disable-default-bootnode --raw > chainspec/customSpecRaw.json
+
+///////////////////Generating new Sr25519 Keys
+./target/release/substrate-climacoin key generate --scheme Sr25519 --password-interactive
+
+
+///////////////////Generating new Ed25519 Keys
+./target/release/substrate-climacoin key inspect --password-interactive --scheme Ed25519 "case main citizen wedding festival section bulb process tunnel mobile empower nut"
+
+
 
 
 ./target/release/substrate-climacoin \
@@ -7,9 +19,42 @@
 --port 30334 \
 --ws-port 9944 \
 --rpc-port 9934 \
---node-key 0b078f108b3d9d3c9bb41673707eec09f82a9c453286b712c6c3b5c264e2cf13 \
---validator \
---alice
+--node-key d63135707aac070fd6c5a812ddb3593a628d695891fc6adb7a67c03a753e548c \
+--validator
+
+{
+	"
+	  Secret phrase:       turkey faint visit ice reason disease pet harvest flame client tenant runway
+	  Network ID:        substrate
+	  Secret seed:       0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb
+	  Public key (hex):  0x6c630abd02d4191b793128d9de7727aca90aeeb66fc23563fde1b95af99cb776
+	  Account ID:        0x6c630abd02d4191b793128d9de7727aca90aeeb66fc23563fde1b95af99cb776
+	  Public key (SS58): 5EWpT56xViWyLX2sDTyrCbxAFo8rd8bsTHhyqbvX1if522eL
+	  SS58 Address:      5EWpT56xViWyLX2sDTyrCbxAFo8rd8bsTHhyqbvX1if522eL
+	",
+	"
+	  Secret phrase:       turkey faint visit ice reason disease pet harvest flame client tenant runway
+	  Network ID:        substrate
+	  Secret seed:       0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb
+	  Public key (hex):  0x8268bd9c29ff4ab64b8ce0a461046ea60a1b2f7d9735f6bd6f6efbdc4803dca3
+	  Account ID:        0x8268bd9c29ff4ab64b8ce0a461046ea60a1b2f7d9735f6bd6f6efbdc4803dca3
+	  Public key (SS58): 5F1hCMn7HbLvieTK8ZG6d8WxmvaN1JykQgjsYk1FnpmueH7Z
+	  SS58 Address:      5F1hCMn7HbLvieTK8ZG6d8WxmvaN1JykQgjsYk1FnpmueH7Z
+
+	"
+}
+
+./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb//1//babe" --password-interactive --key-type babe
+
+./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb//1//grandpa" --password-interactive --key-type gran
+
+./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb//1//im_online" --password-interactive --key-type imon
+
+
+
+
+
+
 
 
 ./target/release/substrate-climacoin \
@@ -19,8 +64,42 @@
 --ws-port 9945 \
 --rpc-port 9935 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
---bob
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWD3JYgzRcGrShuFE5jHKETX8BXub3pkBVK8uZqzsqdQYM
+{
+	"
+	  Secret phrase:       such shoe rally crunch captain palace hold useless medal shield any tomato
+	  Network ID:        substrate
+	  Secret seed:       0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8
+	  Public key (hex):  0xe8182e72614ab7be1635589c6bbe9852bbf8346be1d9518a8fc653bed479747b
+	  Account ID:        0xe8182e72614ab7be1635589c6bbe9852bbf8346be1d9518a8fc653bed479747b
+	  Public key (SS58): 5HK29eB1jCGxGhD7dgYn5ijsM5mnm2iq2zG2ryk8qDF3bBt1
+	  SS58 Address:      5HK29eB1jCGxGhD7dgYn5ijsM5mnm2iq2zG2ryk8qDF3bBt1
+	",
+	"
+	  Secret phrase:       such shoe rally crunch captain palace hold useless medal shield any tomato
+	  Network ID:        substrate
+	  Secret seed:       0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8
+	  Public key (hex):  0x86fef90f6cb1d0f824f07e4b9e8049dbb6da22b5104671bf8119a06a492a10d0
+	  Account ID:        0x86fef90f6cb1d0f824f07e4b9e8049dbb6da22b5104671bf8119a06a492a10d0
+	  Public key (SS58): 5F7i1uhDVyB4c3BZNbVMs9yW34fSALFPWsSEqnjCACg7n2Kr
+	  SS58 Address:      5F7i1uhDVyB4c3BZNbVMs9yW34fSALFPWsSEqnjCACg7n2Kr
+	"
+}
+
+
+./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8//2//babe" --password-interactive --key-type babe
+
+./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8//2//grandpa" --password-interactive --key-type gran
+
+./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8//2//im_online" --password-interactive --key-type imon
+
+
+
+
+
+
+
+
 
 
 ./target/release/substrate-climacoin \
@@ -30,46 +109,46 @@
 --ws-port 9946 \
 --rpc-port 9936 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
---charlie
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWD3JYgzRcGrShuFE5jHKETX8BXub3pkBVK8uZqzsqdQYM
 
 
-./target/release/substrate-climacoin \
---base-path /tmp/forth \
---chain chainspec/customSpecRaw.json \
---port 30337 \
---ws-port 9947 \
---rpc-port 9937 \
---validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
---dave
-
-
-
-./target/release/substrate-climacoin \
---base-path /tmp/fifth   \
---chain chainspec/customSpecRaw.json \
---port 30338 \
---ws-port 9948 \
---rpc-port 9938 \
---validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWFQE3d3fNgndEYWajSrf7VMZ7hkvtQF33yM1yhvFJaiUe \
---eve
+{
+	"
+ 	  Secret phrase:       case main citizen wedding festival section bulb process tunnel mobile empower nut
+	  Network ID:        substrate
+	  Secret seed:       0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4
+	  Public key (hex):  0xe2365e5f43a65a6eda416b36a5ba2cfd6f80c576cf3e7fd3fb85249cc6d0ce1d
+	  Account ID:        0xe2365e5f43a65a6eda416b36a5ba2cfd6f80c576cf3e7fd3fb85249cc6d0ce1d
+	  Public key (SS58): 5HBJq6FWgsr7nZv1aTVZn5TYfsHHfn79MrvNuyczZx38kcuy
+	  SS58 Address:      5HBJq6FWgsr7nZv1aTVZn5TYfsHHfn79MrvNuyczZx38kcuy
+	",
+	"
+	  Secret phrase:       case main citizen wedding festival section bulb process tunnel mobile empower nut
+	  Network ID:        substrate
+	  Secret seed:       0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4
+	  Public key (hex):  0xb72cccf6132ea9a8881b5af7277b014f933c348098dbced1a12d2358f099e070
+	  Account ID:        0xb72cccf6132ea9a8881b5af7277b014f933c348098dbced1a12d2358f099e070
+	  Public key (SS58): 5GCsvpAApmjNoUMy5wTtEY5s7m3qxFbGPXdgKZURRJkfjyzf
+	  SS58 Address:      5GCsvpAApmjNoUMy5wTtEY5s7m3qxFbGPXdgKZURRJkfjyzf
+	"
+}
 
 
 
 
-./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//1//babe" --password-interactive --key-type babe
+./target/release/substrate-climacoin key insert --base-path /tmp/third --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4//3//babe" --password-interactive --key-type babe
 
-./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "$SECRET//1//grandpa" --password-interactive --key-type gran
+./target/release/substrate-climacoin key insert --base-path /tmp/third --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4//3//grandpa" --password-interactive --key-type gran
 
-./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//1//im_online" --password-interactive --key-type imon
+./target/release/substrate-climacoin key insert --base-path /tmp/third --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4//3//im_online" --password-interactive --key-type imon
 
 
-./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//2//babe" --password-interactive --key-type babe
 
-./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "$SECRET//2//grandpa" --password-interactive --key-type gran
 
-./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "$SECRET//2//im_online" --password-interactive --key-type imon
+
+
+
+
+
 
 
