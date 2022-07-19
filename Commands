@@ -1,54 +1,89 @@
 ./target/release/substrate-climacoin key generate-node-key
 
 
+./target/release/substrate-climacoin build-spec --disable-default-bootnode --chain dev > chainspec/customSpec.json
+
+
 ./target/release/substrate-climacoin build-spec --chain=chainspec/customSpec.json --disable-default-bootnode --raw > chainspec/customSpecRaw.json
 
 ///////////////////Generating new Sr25519 Keys
+./target/release/substrate-climacoin key generate --scheme Sr25519 
 ./target/release/substrate-climacoin key generate --scheme Sr25519 --password-interactive
 
 
 ///////////////////Generating new Ed25519 Keys
-./target/release/substrate-climacoin key inspect --password-interactive --scheme Ed25519 "case main citizen wedding festival section bulb process tunnel mobile empower nut"
+./target/release/substrate-climacoin key inspect --scheme Ed25519 "acid junior merit major edit split caught inner marriage blade wolf regret"
+./target/release/substrate-climacoin key inspect --password-interactive --scheme Ed25519 "already recipe exercise purity chicken wave curious ceiling cash fan oyster staff"
 
 
 
 
 ./target/release/substrate-climacoin \
---base-path /tmp/first \
+--base-path /tmp/climacoin/first \
 --chain chainspec/customSpecRaw.json \
 --port 30334 \
 --ws-port 9944 \
 --rpc-port 9934 \
---node-key d63135707aac070fd6c5a812ddb3593a628d695891fc6adb7a67c03a753e548c \
---validator
+--node-key 7a1f732c1d7b6550def7cae4323ec0fdda33e1c757f8f109e8666d1ea47566b3 \
+--validator \
+--alice
+
 
 {
 	"
-	  Secret phrase:       turkey faint visit ice reason disease pet harvest flame client tenant runway
-	  Network ID:        substrate
-	  Secret seed:       0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb
-	  Public key (hex):  0x6c630abd02d4191b793128d9de7727aca90aeeb66fc23563fde1b95af99cb776
-	  Account ID:        0x6c630abd02d4191b793128d9de7727aca90aeeb66fc23563fde1b95af99cb776
-	  Public key (SS58): 5EWpT56xViWyLX2sDTyrCbxAFo8rd8bsTHhyqbvX1if522eL
-	  SS58 Address:      5EWpT56xViWyLX2sDTyrCbxAFo8rd8bsTHhyqbvX1if522eL
+Secret phrase:       misery bleak civil belt guilt culture enjoy shock force glance truth course
+  Network ID:        substrate
+  Secret seed:       0x4a157c456db70917c2346c42350c42c9a2e826bcc187e8f7b8aa70194b6b0b5a
+  Public key (hex):  0x4c97014ff29633a68d604c2fce0d473390cdf4483ad7c92394d0df96baf3c361
+  Account ID:        0x4c97014ff29633a68d604c2fce0d473390cdf4483ad7c92394d0df96baf3c361
+  Public key (SS58): 5Do8MW5vrNYmC84Fo2EMKWpV6EHhCcbVC36Kjk39ycoKGhku
+  SS58 Address:      5Do8MW5vrNYmC84Fo2EMKWpV6EHhCcbVC36Kjk39ycoKGhku
+
 	",
+
 	"
-	  Secret phrase:       turkey faint visit ice reason disease pet harvest flame client tenant runway
-	  Network ID:        substrate
-	  Secret seed:       0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb
-	  Public key (hex):  0x8268bd9c29ff4ab64b8ce0a461046ea60a1b2f7d9735f6bd6f6efbdc4803dca3
-	  Account ID:        0x8268bd9c29ff4ab64b8ce0a461046ea60a1b2f7d9735f6bd6f6efbdc4803dca3
-	  Public key (SS58): 5F1hCMn7HbLvieTK8ZG6d8WxmvaN1JykQgjsYk1FnpmueH7Z
-	  SS58 Address:      5F1hCMn7HbLvieTK8ZG6d8WxmvaN1JykQgjsYk1FnpmueH7Z
+Secret phrase:       misery bleak civil belt guilt culture enjoy shock force glance truth course
+  Network ID:        substrate
+  Secret seed:       0x4a157c456db70917c2346c42350c42c9a2e826bcc187e8f7b8aa70194b6b0b5a
+  Public key (hex):  0xcd922edf7e12b2710b29a8784926493487e975240fed6fb4a7937584cdcd28bf
+  Account ID:        0xcd922edf7e12b2710b29a8784926493487e975240fed6fb4a7937584cdcd28bf
+  Public key (SS58): 5GiF6hCxRgjZgDvjHZf5tp93cs6EHo45MykBtndMfm3LZ8Zr
+  SS58 Address:      5GiF6hCxRgjZgDvjHZf5tp93cs6EHo45MykBtndMfm3LZ8Zr
 
 	"
 }
 
-./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb//1//babe" --password-interactive --key-type babe
+./target/release/substrate-climacoin key insert \
+  --base-path /tmp/climacoin/first \
+  --chain chainspec/customSpecRaw.json \
+  --scheme Sr25519 \
+  --suri "//Alice" \
+  --key-type babe
 
-./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb//1//grandpa" --password-interactive --key-type gran
+./target/release/substrate-climacoin key insert \
+  --base-path /tmp/climacoin/first \
+  --chain chainspec/customSpecRaw.json \
+  --scheme Ed25519 \
+  --suri "//Alice" \
+  --key-type gran
 
-./target/release/substrate-climacoin key insert --base-path /tmp/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x9a41dcd5e3a7cacc6ff37e3fbaebdda452d61fc141fdd37e0fe3f9e4f4c274fb//1//im_online" --password-interactive --key-type imon
+./target/release/substrate-climacoin key insert \
+  --base-path /tmp/climacoin/first \
+  --chain chainspec/customSpecRaw.json \
+  --scheme Sr25519 \
+  --suri "//Alice" \
+  --key-type imon
+
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/first --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "already recipe exercise purity chicken wave curious ceiling cash fan oyster staff" --key-type gran
+
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "already recipe exercise purity chicken wave curious ceiling cash fan oyster staff" --key-type imon
+
+
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "already recipe exercise purity chicken wave curious ceiling cash fan oyster staff" --password-interactive --key-type babe
+
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/first --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "already recipe exercise purity chicken wave curious ceiling cash fan oyster staff" --password-interactive --key-type gran
+
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/first --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "already recipe exercise purity chicken wave curious ceiling cash fan oyster staff" --password-interactive --key-type imon
 
 
 
@@ -58,40 +93,42 @@
 
 
 ./target/release/substrate-climacoin \
---base-path /tmp/second \
+--base-path /tmp/climacoin/second \
 --chain chainspec/customSpecRaw.json \
 --port 30335 \
 --ws-port 9945 \
 --rpc-port 9935 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWD3JYgzRcGrShuFE5jHKETX8BXub3pkBVK8uZqzsqdQYM
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWJawCuVj7zxcdcbA1YWMqThrnSmdJwer1jdy47d6Qwkiq
 {
 	"
-	  Secret phrase:       such shoe rally crunch captain palace hold useless medal shield any tomato
-	  Network ID:        substrate
-	  Secret seed:       0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8
-	  Public key (hex):  0xe8182e72614ab7be1635589c6bbe9852bbf8346be1d9518a8fc653bed479747b
-	  Account ID:        0xe8182e72614ab7be1635589c6bbe9852bbf8346be1d9518a8fc653bed479747b
-	  Public key (SS58): 5HK29eB1jCGxGhD7dgYn5ijsM5mnm2iq2zG2ryk8qDF3bBt1
-	  SS58 Address:      5HK29eB1jCGxGhD7dgYn5ijsM5mnm2iq2zG2ryk8qDF3bBt1
+Secret phrase:       essay index obscure scare nose retreat ostrich sheriff salt reason final aerobic
+  Network ID:        substrate
+  Secret seed:       0x8e753b2f1926e5ea6ba7989de9fcf6f7ef6da298d9bf8682a57da8b0e667f60e
+  Public key (hex):  0xa8ce8f52221dca15757c1c7546a1299c3a69c40898d5f783dd2e5f94d36aee18
+  Account ID:        0xa8ce8f52221dca15757c1c7546a1299c3a69c40898d5f783dd2e5f94d36aee18
+  Public key (SS58): 5Ft3GCb9K6AC6jTgs2Hs952EJ37DpnQz47KYcxdQLtYdkbJe
+  SS58 Address:      5Ft3GCb9K6AC6jTgs2Hs952EJ37DpnQz47KYcxdQLtYdkbJe
+
 	",
 	"
-	  Secret phrase:       such shoe rally crunch captain palace hold useless medal shield any tomato
-	  Network ID:        substrate
-	  Secret seed:       0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8
-	  Public key (hex):  0x86fef90f6cb1d0f824f07e4b9e8049dbb6da22b5104671bf8119a06a492a10d0
-	  Account ID:        0x86fef90f6cb1d0f824f07e4b9e8049dbb6da22b5104671bf8119a06a492a10d0
-	  Public key (SS58): 5F7i1uhDVyB4c3BZNbVMs9yW34fSALFPWsSEqnjCACg7n2Kr
-	  SS58 Address:      5F7i1uhDVyB4c3BZNbVMs9yW34fSALFPWsSEqnjCACg7n2Kr
+Secret phrase:       essay index obscure scare nose retreat ostrich sheriff salt reason final aerobic
+  Network ID:        substrate
+  Secret seed:       0x8e753b2f1926e5ea6ba7989de9fcf6f7ef6da298d9bf8682a57da8b0e667f60e
+  Public key (hex):  0x94b762d5009684b6e3501316ec11132d689a9e6975ebd9c4974d688cedd51f75
+  Account ID:        0x94b762d5009684b6e3501316ec11132d689a9e6975ebd9c4974d688cedd51f75
+  Public key (SS58): 5FRhRNxQSPuVyCDThvUL8Jph6o1yELo6u5PeY2UuqwC2wCbq
+  SS58 Address:      5FRhRNxQSPuVyCDThvUL8Jph6o1yELo6u5PeY2UuqwC2wCbq
+
 	"
 }
 
 
-./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8//2//babe" --password-interactive --key-type babe
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "essay index obscure scare nose retreat ostrich sheriff salt reason final aerobic" --key-type babe
 
-./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8//2//grandpa" --password-interactive --key-type gran
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/second --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "essay index obscure scare nose retreat ostrich sheriff salt reason final aerobic" --key-type gran
 
-./target/release/substrate-climacoin key insert --base-path /tmp/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x5f58a950fb417e0b2e12d9b7f6c54f6f15928b973a85f25139ac5151c7b11bb8//2//im_online" --password-interactive --key-type imon
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/second --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "essay index obscure scare nose retreat ostrich sheriff salt reason final aerobic" --key-type imon
 
 
 
@@ -103,44 +140,44 @@
 
 
 ./target/release/substrate-climacoin \
---base-path /tmp/third \
+--base-path /tmp/climacoin/third \
 --chain chainspec/customSpecRaw.json \
 --port 30336 \
 --ws-port 9946 \
 --rpc-port 9936 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWD3JYgzRcGrShuFE5jHKETX8BXub3pkBVK8uZqzsqdQYM
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWJawCuVj7zxcdcbA1YWMqThrnSmdJwer1jdy47d6Qwkiq
 
 
 {
 	"
- 	  Secret phrase:       case main citizen wedding festival section bulb process tunnel mobile empower nut
-	  Network ID:        substrate
-	  Secret seed:       0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4
-	  Public key (hex):  0xe2365e5f43a65a6eda416b36a5ba2cfd6f80c576cf3e7fd3fb85249cc6d0ce1d
-	  Account ID:        0xe2365e5f43a65a6eda416b36a5ba2cfd6f80c576cf3e7fd3fb85249cc6d0ce1d
-	  Public key (SS58): 5HBJq6FWgsr7nZv1aTVZn5TYfsHHfn79MrvNuyczZx38kcuy
-	  SS58 Address:      5HBJq6FWgsr7nZv1aTVZn5TYfsHHfn79MrvNuyczZx38kcuy
+Secret phrase:       acid junior merit major edit split caught inner marriage blade wolf regret
+  Network ID:        substrate
+  Secret seed:       0xb726267c3a002780cd03447b86901b4ec551d32215eba8312f4507428b52a5c0
+  Public key (hex):  0xcad0e397d1fa47cfa643b028ecab1318c61b105e389bf9774987a25695da4014
+  Account ID:        0xcad0e397d1fa47cfa643b028ecab1318c61b105e389bf9774987a25695da4014
+  Public key (SS58): 5Gedam3hYYeoPG2Z3YvymsTttntatvQVGRNCxvB3Nn6wTW4j
+  SS58 Address:      5Gedam3hYYeoPG2Z3YvymsTttntatvQVGRNCxvB3Nn6wTW4j
+
 	",
 	"
-	  Secret phrase:       case main citizen wedding festival section bulb process tunnel mobile empower nut
-	  Network ID:        substrate
-	  Secret seed:       0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4
-	  Public key (hex):  0xb72cccf6132ea9a8881b5af7277b014f933c348098dbced1a12d2358f099e070
-	  Account ID:        0xb72cccf6132ea9a8881b5af7277b014f933c348098dbced1a12d2358f099e070
-	  Public key (SS58): 5GCsvpAApmjNoUMy5wTtEY5s7m3qxFbGPXdgKZURRJkfjyzf
-	  SS58 Address:      5GCsvpAApmjNoUMy5wTtEY5s7m3qxFbGPXdgKZURRJkfjyzf
+Secret phrase:       acid junior merit major edit split caught inner marriage blade wolf regret
+  Network ID:        substrate
+  Secret seed:       0xb726267c3a002780cd03447b86901b4ec551d32215eba8312f4507428b52a5c0
+  Public key (hex):  0xb9f84a1dbb262d418cd321a874d2fa74681e7adc9577ea3c266a20ec37fcebcd
+  Account ID:        0xb9f84a1dbb262d418cd321a874d2fa74681e7adc9577ea3c266a20ec37fcebcd
+  Public key (SS58): 5GGYUQBCi9R9pfPUuhSaXnfZyvd3SFQ1yXyQVKnMcgaLWeEc
+  SS58 Address:      5GGYUQBCi9R9pfPUuhSaXnfZyvd3SFQ1yXyQVKnMcgaLWeEc
+
 	"
 }
 
 
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/third --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "acid junior merit major edit split caught inner marriage blade wolf regret" --key-type babe
 
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/third --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "acid junior merit major edit split caught inner marriage blade wolf regret" --key-type gran
 
-./target/release/substrate-climacoin key insert --base-path /tmp/third --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4//3//babe" --password-interactive --key-type babe
-
-./target/release/substrate-climacoin key insert --base-path /tmp/third --chain chainspec/customSpecRaw.json --scheme Ed25519 --suri "0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4//3//grandpa" --password-interactive --key-type gran
-
-./target/release/substrate-climacoin key insert --base-path /tmp/third --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "0x7a512dec21b7036636bf0f179118ea11a18bbb96f77fdb5685d1887da28bdfe4//3//im_online" --password-interactive --key-type imon
+./target/release/substrate-climacoin key insert --base-path /tmp/climacoin/third --chain chainspec/customSpecRaw.json --scheme Sr25519 --suri "acid junior merit major edit split caught inner marriage blade wolf regret" --key-type imon
 
 
 
