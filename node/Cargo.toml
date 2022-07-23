@@ -1,5 +1,5 @@
 [package]
-name = "substrate-climacoin"
+name = "climacoin-node"
 version = "4.0.0-dev"
 description = "A fresh FRAME-based Substrate node, ready for hacking."
 authors = ["Ciprian"]
@@ -14,7 +14,7 @@ build = "build.rs"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [[bin]]
-name = "substrate-climacoin"
+name = "climacoin-node"
 
 [dependencies]
 clap = { version = "3.0", features = ["derive"] }
@@ -47,7 +47,7 @@ sp-timestamp = { version = "4.0.0-dev", git = "https://github.com/paritytech/sub
 sp-authorship = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 sp-transaction-storage-proof = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 
-# These dependencies are used for the node template's RPCs
+# These dependencies are used for the node's RPCs
 jsonrpc-core = "18.0.0"
 sc-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 sp-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
@@ -68,7 +68,7 @@ frame-benchmarking-cli = { version = "4.0.0-dev", git = "https://github.com/pari
 pallet-im-online = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.18" }
 
 # Local Dependencies
-node-template-runtime = { version = "4.0.0-dev", path = "../runtime" }
+climacoin-runtime = { version = "4.0.0-dev", path = "../runtime" }
 node-primitives = { version = "2.0.0", default-features = false, path = "../primitives" }
 
 [build-dependencies]
@@ -76,4 +76,4 @@ substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/pa
 
 [features]
 default = []
-runtime-benchmarks = ["node-template-runtime/runtime-benchmarks"]
+runtime-benchmarks = ["climacoin-runtime/runtime-benchmarks"]

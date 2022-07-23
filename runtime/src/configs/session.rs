@@ -2,6 +2,7 @@
 
 use crate::*;
 
+
 impl pallet_session::Config for Runtime {
 	type Event = Event;
 	type ValidatorId = <Self as frame_system::Config>::AccountId;

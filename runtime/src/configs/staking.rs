@@ -1,6 +1,8 @@
 #![allow(unused_imports)]
 
+
 use crate::*;
+use pallet_treasury::BurnImbalanceAdapter;
 
 pallet_staking_reward_curve::build! {
 	const REWARD_CURVE: PiecewiseLinear<'static> = curve!(
@@ -20,9 +22,10 @@ impl pallet_staking::BenchmarkingConfig for StakingBenchmarkingConfig {
 }
 
 parameter_types! {
+	// TODO: Update SessionsPerEra BondingDuration SlashDeferDuration For PROD
 	pub const SessionsPerEra: sp_staking::SessionIndex = 2;
-	pub const BondingDuration: sp_staking::EraIndex = 24 * 28;
-	pub const SlashDeferDuration: sp_staking::EraIndex = 24 * 7; // 1/4 the bonding duration.
+	pub const BondingDuration: sp_staking::EraIndex = 1 * 28;
+	pub const SlashDeferDuration: sp_staking::EraIndex = 1 * 7; // 1/4 the bonding duration.
 	pub const RewardCurve: &'static PiecewiseLinear<'static> = &REWARD_CURVE;
 	pub const MaxNominatorRewardedPerValidator: u32 = 256;
 	pub const OffendingValidatorsThreshold: Perbill = Perbill::from_percent(17);
@@ -34,10 +37,10 @@ impl pallet_staking::Config for Runtime {
 	type Currency = Balances;
 	type UnixTime = Timestamp;
 	type CurrencyToVote = U128CurrencyToVote;
-	type RewardRemainder = (); //
+	type RewardRemainder = ();
 	type Event = Event;
 	type Slash = Treasury;
-	type Reward = BurnImbalanceAdapter<Runtime>; // rewards are minted from the void
+	type Reward = BurnImbalanceAdapter<Runtime>;
 	type SessionsPerEra = SessionsPerEra;
 	type BondingDuration = BondingDuration;
 	type SlashDeferDuration = SlashDeferDuration;

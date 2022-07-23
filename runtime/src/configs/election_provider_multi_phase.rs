@@ -31,6 +31,7 @@ parameter_types! {
 }
 
 
+
 impl onchain::Config for Runtime {
 	type Accuracy = Perbill;
 	type DataProvider = <Self as pallet_election_provider_multi_phase::Config>::DataProvider;
@@ -82,6 +83,14 @@ impl Get<Option<(usize, ExtendedBalance)>> for OffchainRandomBalancing {
 	}
 }
 
+sp_npos_elections::generate_solution_type!(
+	#[compact]
+	pub struct NposSolution16::<
+		VoterIndex = u32,
+		TargetIndex = u16,
+		Accuracy = sp_runtime::PerU16,
+	>(16)
+);
 
 impl pallet_election_provider_multi_phase::Config for Runtime {
 	type Event = Event;
