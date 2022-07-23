@@ -3,7 +3,6 @@
 use crate::*;
 
 
-
 impl pallet_grandpa::Config for Runtime {
 	type Event = Event;
 	type Call = Call;

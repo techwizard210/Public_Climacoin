@@ -29,11 +29,11 @@ SlashDeferDuration - Duration after which funds are slashed from validator
 
 ./target/release/climacoin-node \
 --base-path /tmp/climacoin/first \
---chain chainspec/customSpecRaw.json \
+--chain chainspec/localSpecRaw.json \
 --port 30334 \
 --ws-port 9944 \
 --rpc-port 9934 \
---node-key df034c7ad56c01ed93bf3d07e34778169ca8b8e31834f0bd11cf7b3936104eac \
+--node-key ccdbd4216790f3891c220bb7bb257076f188f3aeb5d95ab45af344841122c576 \
 --validator \
 --alice
 
@@ -110,12 +110,12 @@ Secret phrase:       bike position decide earn review script spray wide indicate
 
 ./target/release/climacoin-node \
 --base-path /tmp/climacoin/second \
---chain chainspec/customSpecRaw.json \
+--chain chainspec/localSpecRaw.json \
 --port 30335 \
 --ws-port 9945 \
 --rpc-port 9935 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWEaSyk6EwtkJupGtMv4y3tjPpkVNRR9xattE7QjZMPWX6
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWBDQ1uzeDmpA5Q7KeCmqSVyQoY5Bx6XTpuK76SUsZiAB9
 {
 	"
 Secret phrase:       must injury melody tent subway voice clump moon eternal useful interest whisper
@@ -156,12 +156,12 @@ Secret phrase:       must injury melody tent subway voice clump moon eternal use
 
 ./target/release/climacoin-node \
 --base-path /tmp/climacoin/third \
---chain chainspec/customSpecRaw.json \
+--chain chainspec/localSpecRaw.json \
 --port 30336 \
 --ws-port 9946 \
 --rpc-port 9936 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWEaSyk6EwtkJupGtMv4y3tjPpkVNRR9xattE7QjZMPWX6
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWBDQ1uzeDmpA5Q7KeCmqSVyQoY5Bx6XTpuK76SUsZiAB9
 
 
 {
@@ -202,12 +202,12 @@ Secret phrase:       office equip shaft arrive mansion frost source lonely habit
 
 ./target/release/climacoin-node \
 --base-path /tmp/climacoin/forth \
---chain chainspec/customSpecRaw.json \
+--chain chainspec/localSpecRaw.json \
 --port 30337 \
 --ws-port 9947 \
 --rpc-port 9937 \
 --validator \
---bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWEaSyk6EwtkJupGtMv4y3tjPpkVNRR9xattE7QjZMPWX6
+--bootnodes /ip4/127.0.0.1/tcp/30334/p2p/12D3KooWBDQ1uzeDmpA5Q7KeCmqSVyQoY5Bx6XTpuK76SUsZiAB9
 
 
 

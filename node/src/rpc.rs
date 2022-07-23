@@ -7,7 +7,7 @@
 
 use std::sync::Arc;
 
-use node_template_runtime::{opaque::Block};
+use climacoin_runtime::{opaque::Block};
 pub use sc_rpc_api::DenyUnsafe;
 use sc_transaction_pool_api::TransactionPool;
 use sp_api::ProvideRuntimeApi;

@@ -2,6 +2,7 @@
 
 use crate::*;
 
+const NORMAL_DISPATCH_RATIO: Perbill = Perbill::from_percent(75);
 
 parameter_types! {
 	pub const Version: RuntimeVersion = VERSION;
@@ -12,6 +13,13 @@ parameter_types! {
 	pub BlockLength: frame_system::limits::BlockLength = frame_system::limits::BlockLength
 		::max_with_normal_ratio(5 * 1024 * 1024, NORMAL_DISPATCH_RATIO);
 	pub const SS58Prefix: u8 = 42;
+}
+
+pub struct BaseFilter;
+impl Contains<Call> for BaseFilter {
+	fn contains(call: &Call) -> bool {
+		!matches!(call, Call::TemplateModule(..))
+	}
 }
 
 // Configure FRAME pallets to include in runtime.
