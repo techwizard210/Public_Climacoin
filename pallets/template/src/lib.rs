@@ -19,11 +19,17 @@ pub mod pallet {
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
+	use sp_runtime::traits::AtLeast32BitUnsigned;
+	use sp_runtime::traits::Saturating;
+
 	/// Configure the pallet by specifying the parameters and types on which it depends.
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
 		/// Because this pallet emits events, it depends on the runtime's definition of an event.
 		type Event: From<Event<Self>> + IsType<<Self as frame_system::Config>::Event>;
+
+		// The type used to store balances.
+		type Balance: Member + Parameter + AtLeast32BitUnsigned + Default + Copy;
 	}
 
 	#[pallet::pallet]
