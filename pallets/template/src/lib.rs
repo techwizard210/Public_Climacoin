@@ -19,14 +19,21 @@ pub mod pallet {
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
+	use sp_runtime::traits::AtLeast32BitUnsigned;
+	use sp_runtime::traits::Saturating;
+
 	/// Configure the pallet by specifying the parameters and types on which it depends.
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
 		/// Because this pallet emits events, it depends on the runtime's definition of an event.
 		type Event: From<Event<Self>> + IsType<<Self as frame_system::Config>::Event>;
+
+		// The type used to store balances.
+		type Balance: Member + Parameter + AtLeast32BitUnsigned + Default + Copy;
 	}
 
 	#[pallet::pallet]
+	#[pallet::without_storage_info]
 	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
@@ -38,6 +45,16 @@ pub mod pallet {
 	// https://docs.substrate.io/v3/runtime/storage#declaring-storage-items
 	pub type Something<T> = StorageValue<_, u32>;
 
+	#[pallet::storage]
+	#[pallet::getter(fn get_balance)]
+	pub(super) type BalanceToAccount<T: Config> = StorageMap<
+		_,
+		Blake2_128Concat,
+		T::AccountId,
+		T::Balance,
+		ValueQuery
+	>;
+	
 	// Pallets use events to inform users when important changes are made.
 	// https://docs.substrate.io/v3/runtime/events-and-errors
 	#[pallet::event]
