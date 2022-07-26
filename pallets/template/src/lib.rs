@@ -54,7 +54,7 @@ pub mod pallet {
 		T::Balance,
 		ValueQuery
 	>;
-	
+
 	// Pallets use events to inform users when important changes are made.
 	// https://docs.substrate.io/v3/runtime/events-and-errors
 	#[pallet::event]
@@ -118,5 +118,29 @@ pub mod pallet {
 				},
 			}
 		}
+
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
+		pub fn mint(
+			origin: OriginFor<T>,
+			#[pallet::compact] amount: T::Balance
+			) -> DispatchResultWithPostInfo {
+	
+			let sender = ensure_signed(origin)?;
+	
+			// // Check if the kitty does not already exist in our storage map
+			//  ensure!(Self::kitties(&kitty_id) == None, <Error<T>>::KittyExists);
+	
+			// Update storage.
+			<BalanceToAccount<T>>::insert(&sender, amount);
+	
+			// Emit an event.
+			Self::deposit_event(Event::MintedNewSupply(sender));
+	
+			// Return a successful DispatchResultWithPostInfo.
+			Ok(().into())
+		}
+
+
+		
 	}
 }
