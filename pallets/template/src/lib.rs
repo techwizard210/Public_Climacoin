@@ -64,8 +64,8 @@ pub mod pallet {
 		/// parameters. [something, who]
 		SomethingStored(u32, T::AccountId),
 
-		MintedNewSupply(T::AccountId),
-		Transferred(T::AccountId, T::AccountId, T::Balance),
+		// MintedNewSupply(T::AccountId),
+		// Transferred(T::AccountId, T::AccountId, T::Balance),
 	}
 
 	// Errors inform users that something went wrong.
