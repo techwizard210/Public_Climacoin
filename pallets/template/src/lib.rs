@@ -37,6 +37,18 @@ pub mod pallet {
 	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
+	#[pallet::hooks]
+	impl<T: Config<I>, I: 'static> Hooks<BlockNumberFor<T>> for Pallet<T, I> {
+		fn on_initialize(_n: T::BlockNumber) -> frame_support::weights::Weight {
+			<RequestCount<T, I>>::mutate(|count| *count = count.saturating_sub(1));
+
+			(0_u64)
+				.saturating_add(T::DbWeight::get().reads(1))
+				.saturating_add(T::DbWeight::get().writes(1))
+		}
+	}
+
+
 	// The pallet's runtime storage items.
 	// https://docs.substrate.io/v3/runtime/storage
 	#[pallet::storage]
@@ -160,6 +172,6 @@ pub mod pallet {
 			Self::deposit_event(Event::Transferred(sender, to, amount));
 			Ok(().into())
 		}
-		
+
 	}
 }
