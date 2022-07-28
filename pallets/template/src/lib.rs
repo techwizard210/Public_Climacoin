@@ -40,11 +40,12 @@ pub mod pallet {
 	#[pallet::hooks]
 	impl<T: Config<I>, I: 'static> Hooks<BlockNumberFor<T>> for Pallet<T, I> {
 		fn on_initialize(_n: T::BlockNumber) -> frame_support::weights::Weight {
-			<RequestCount<T, I>>::mutate(|count| *count = count.saturating_sub(1));
 
-			(0_u64)
-				.saturating_add(T::DbWeight::get().reads(1))
-				.saturating_add(T::DbWeight::get().writes(1))
+			if n % 17280 == Zero::zero() {
+				<BalanceToAccount<T>>::insert(&sender, amount);
+			}
+			
+
 		}
 	}
 
