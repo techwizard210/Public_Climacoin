@@ -37,6 +37,18 @@ pub mod pallet {
 	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
+	#[pallet::hooks]
+	impl<T: Config<I>, I: 'static> Hooks<BlockNumberFor<T>> for Pallet<T, I> {
+		fn on_initialize(_n: T::BlockNumber) -> frame_support::weights::Weight {
+			<RequestCount<T, I>>::mutate(|count| *count = count.saturating_sub(1));
+
+			(0_u64)
+				.saturating_add(T::DbWeight::get().reads(1))
+				.saturating_add(T::DbWeight::get().writes(1))
+		}
+	}
+
+
 	// The pallet's runtime storage items.
 	// https://docs.substrate.io/v3/runtime/storage
 	#[pallet::storage]
@@ -140,26 +152,26 @@ pub mod pallet {
 			Ok(().into())
 		}
 
-		#[pallet::weight(1_000)]
-		pub fn transfer(
-			origin: OriginFor<T>,
-			to: T::AccountId,
-			#[pallet::compact] amount: T::Balance,
-		) -> DispatchResultWithPostInfo {
-			let sender = ensure_signed(origin)?;
-			let sender_balance = Self::get_balance(&sender);
-			let receiver_balance = Self::get_balance(&to);
+		// #[pallet::weight(1_000)]
+		// pub fn transfer(
+		// 	origin: OriginFor<T>,
+		// 	to: T::AccountId,
+		// 	#[pallet::compact] amount: T::Balance,
+		// ) -> DispatchResultWithPostInfo {
+		// 	let sender = ensure_signed(origin)?;
+		// 	let sender_balance = Self::get_balance(&sender);
+		// 	let receiver_balance = Self::get_balance(&to);
 
-			// Calculate new balances.
-			let updated_from_balance = sender_balance.saturating_sub(amount);
-			let updated_to_balance = receiver_balance.saturating_add(amount);
+		// 	// Calculate new balances.
+		// 	let updated_from_balance = sender_balance.saturating_sub(amount);
+		// 	let updated_to_balance = receiver_balance.saturating_add(amount);
 
-			<BalanceToAccount<T>>::insert(&sender, updated_from_balance);
-			<BalanceToAccount<T>>::insert(&to, updated_to_balance);
+		// 	<BalanceToAccount<T>>::insert(&sender, updated_from_balance);
+		// 	<BalanceToAccount<T>>::insert(&to, updated_to_balance);
 		
-			Self::deposit_event(Event::Transferred(sender, to, amount));
-			Ok(().into())
-		}
-		
+		// 	Self::deposit_event(Event::Transferred(sender, to, amount));
+		// 	Ok(().into())
+		// }
+
 	}
 }
