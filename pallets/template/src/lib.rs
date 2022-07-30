@@ -30,6 +30,8 @@ pub mod pallet {
 
 		// The type used to store balances.
 		type Balance: Member + Parameter + AtLeast32BitUnsigned + Default + Copy;
+
+		type Slash = Treasury;
 	}
 
 	#[pallet::pallet]
@@ -38,11 +40,21 @@ pub mod pallet {
 	pub struct Pallet<T>(_);
 
 	#[pallet::hooks]
-	impl<T: Config<I>, I: 'static> Hooks<BlockNumberFor<T>> for Pallet<T, I> {
+	impl<T: Config> Hooks<BlockNumberFor<T>> for Pallet<T> {
 		fn on_initialize(_n: T::BlockNumber) -> frame_support::weights::Weight {
 
-			if n % 17280 == Zero::zero() {
-				<BalanceToAccount<T>>::insert(&sender, amount);
+			let initial_supply = 29000000000;
+
+		    if _n < 6307200 {
+		    	let mintAmount = (initial_supply*0.01)/365;
+		    } else if _n < 31536000 && _n > 6307200  {
+		    	let mintAmount = (initial_supply*0.02)/365;
+		    } else if _n > 63072000 {
+		    	let mintAmount = (initial_supply*0.03)/365;
+		    }
+
+			if _n % 17280 == 0 {
+				Treasury::on_unbalanced(mintAmount);
 			}
 			
 
