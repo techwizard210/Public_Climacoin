@@ -39,27 +39,27 @@ pub mod pallet {
 	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
-	#[pallet::hooks]
-	impl<T: Config> Hooks<BlockNumberFor<T>> for Pallet<T> {
-		fn on_initialize(_n: T::BlockNumber) -> frame_support::weights::Weight {
+	// #[pallet::hooks]
+	// impl<T: Config> Hooks<BlockNumberFor<T>> for Pallet<T> {
+	// 	fn on_initialize(_n: T::BlockNumber) -> frame_support::weights::Weight {
 
-			let initial_supply = 29000000000;
+	// 		let initial_supply = 29000000000;
 
-		    if _n < 6307200 {
-		    	let mintAmount = (initial_supply*0.01)/365;
-		    } else if _n < 31536000 && _n > 6307200  {
-		    	let mintAmount = (initial_supply*0.02)/365;
-		    } else if _n > 63072000 {
-		    	let mintAmount = (initial_supply*0.03)/365;
-		    }
+	// 	    if _n < 6307200 {
+	// 	    	let mintAmount = (initial_supply*0.01)/365;
+	// 	    } else if _n < 31536000 && _n > 6307200  {
+	// 	    	let mintAmount = (initial_supply*0.02)/365;
+	// 	    } else if _n > 63072000 {
+	// 	    	let mintAmount = (initial_supply*0.03)/365;
+	// 	    }
 
-			if _n % 17280 == 0 {
-				Treasury::on_unbalanced(mintAmount);
-			}
+	// 		if _n % 17280 == 0 {
+	// 			Treasury::on_unbalanced(mintAmount);
+	// 		}
 			
 
-		}
-	}
+	// 	}
+	// }
 
 
 	// The pallet's runtime storage items.
